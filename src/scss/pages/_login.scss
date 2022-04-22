@@ -1,0 +1,193 @@
+// ANCHOR login
+.general-body {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    margin-right: auto;
+    margin-left: auto;
+    background: white;
+    box-shadow: 2px 1px 9px 0px #84808059;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+
+
+
+    &--left {
+
+        background-image: url("../../assets/images/background/login-register.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+    }
+
+    &--right {
+        padding-right: 40px;
+        padding-bottom: 40px;
+        padding-left: 40px;
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+        margin-top: 40px;
+        background: white;
+
+        h2 {
+            color: #0e0e18;
+        }
+
+        .form-check-auth {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+        }
+
+        .form-bottom {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        &>.btn-cancel {
+            font-size: 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 12px;
+            right: 14px;
+        }
+
+        .input-item {
+            position: relative;
+            margin-top: 30px;
+            text-align: left;
+
+            input {
+                padding: 9px 10px;
+                padding-left: 42px;
+                border-radius: 30px;
+                border: 1px solid;
+                width: 100%;
+                outline: none;
+            }
+
+            .icon {
+                position: absolute;
+                left: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+
+    a.text-form {
+        color: $color-red;
+        float: right;
+
+        &:hover {
+            color: $color-red !important;
+        }
+    }
+}
+
+a.forgot {
+    font-size: 15px;
+    color: $color-red;
+
+    &:hover {
+        color: $color-red !important;
+    }
+}
+
+.button-form {
+    width: 150px;
+    height: 50px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
+        background: $color-red;
+        transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s;
+    }
+
+    span {
+        color: white;
+        transition: transform 0.4s cubic-bezier(0.2, 1, 0.8, 1);
+        position: absolute;
+    }
+
+    &:hover::before {
+        clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+    }
+
+    &:hover {
+        span {
+            transform: translate3d(-10px, 0, 0);
+        }
+    }
+}
+
+//ANCHOR login
+.login {
+
+    // opacity: 0;
+    // visibility: hidden;
+    .list-icon {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        .item-icon {
+            font-size: 30px;
+            padding-right: 25px;
+
+            &:last-child {
+                padding-right: 0;
+            }
+
+            svg {
+                color: #000000b5 !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .general-body {
+        grid-template-columns: 3fr 4fr;
+
+        &--right {
+            margin-top: 0;
+        }
+    }
+}
+
+@media screen and(max-width:500px) {
+    .general-body {
+        grid-template-columns: repeat(1, 1fr);
+
+        &--left {
+            height: 200px;
+        }
+
+        &--right {
+            padding-left: 0;
+            margin-top: 30px;
+        }
+    }
+}

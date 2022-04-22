@@ -1,0 +1,6 @@
+export const GET_LIST_FILM = "GET_LIST_FILM "
+export const REMOVE_ITEM_FILM = "REMOVE_ITEM_FILM"
+export const GET_ITEM_FILM = "GET_ITEM_FILM"
+// THEATER
+export const GET_THEATER = "GET_THEATER"
+export const GET_CLUSTER = "GET_CLUSTER"

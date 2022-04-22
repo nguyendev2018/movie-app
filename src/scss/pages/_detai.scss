@@ -1,0 +1,64 @@
+//movie-detail
+.detail {
+    .movie-info {
+        h2 {
+            width: 100%;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 80px;
+            color: $color-gray--bold;
+
+            strong {
+                -webkit-text-stroke: 1px #111111;
+                -webkit-text-fill-color: transparent;
+                color: transparent;
+                font-size: 100px;
+            }
+        }
+
+        .features {
+            display: flex;
+            align-items: center;
+
+            li {
+                &:not(:last-child) {
+                    padding-right: 20px;
+                }
+
+
+            }
+
+
+        }
+
+        .description {
+            margin-top: 30px;
+            line-height: 30px;
+        }
+    }
+
+    .movie-details {
+        padding: 50px;
+
+        &--show {
+            margin-bottom: 30px;
+
+        }
+
+        &--info {
+            display: flex;
+
+            li {
+                &:first-child {
+                    padding-right: 30px;
+                }
+
+                &.key {
+                    font-weight: 700;
+                }
+            }
+
+
+        }
+    }
+}
