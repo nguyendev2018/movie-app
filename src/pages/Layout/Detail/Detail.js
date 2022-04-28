@@ -1,6 +1,31 @@
-import React from 'react'
+import { Rate } from 'antd';
+import React, { useEffect } from 'react'
+import Moment from 'react-moment';
+import { useDispatch, useSelector } from 'react-redux'
+import { getItemMovieAction } from '../../../redux/actions/ActionAdmin';
+import "../../../assets/styles/circle.css";
+import { Tabs, Radio, Space } from 'antd';
+import { getDetailMovieAction } from '../../../redux/actions/ActionTheater';
+import { NavLink } from 'react-router-dom';
 
-export default function Detail() {
+import moment from 'moment';
+
+export default function Detail(props) {
+    const state = {
+        tabPosition: 'left',
+    };
+    const { tabPosition } = state;
+
+    const { TabPane } = Tabs;
+
+
+    const dispatch = useDispatch();
+    const { itemDetail } = useSelector(state => state.TheaterReducer);
+    console.log(itemDetail);
+    useEffect(() => {
+        let { id } = props.match.params;
+        dispatch(getDetailMovieAction(id))
+    }, [])
     return (
         <section className="detail content-padding">
             <div className="container">
@@ -8,50 +33,129 @@ export default function Detail() {
                     <div className="col-md-8">
                         <div className="movie-info">
                             <h2>
-                                Rise of Empires:
+                                {itemDetail.tenPhim}
                                 <br />
                                 <strong>
                                     Ottoman
                                 </strong>
                             </h2>
-                            <ul className="features">
-                                <li>
-                                    <div className="rate">
-                                        <svg className="circle-chart" viewBox="0 0 30 30" width={40} height={40} fill="transparent" xmlns="http://www.w3.org/2000/svg">
-                                            <circle className="circle-chart__background" stroke="#eee" strokeWidth={2} fill="none" cx={15} cy={15} r={14} />
-                                            <circle className="circle-chart__circle" stroke="#4eb04b" strokeWidth={2} strokeDasharray="50,100" cx={15} cy={15} r={14} />
-                                        </svg>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span className="date">2020</span>
-                                </li>
-                            </ul>
+                            <div className='d-flex'>
+                                <ul className="features">
+                                    <li>
+                                        <div className="rate">
+                                            <div className='c100 p50 small'>
+
+                                                <span>{itemDetail.danhGia * 10}%</span>
+                                                <div className='slice '>
+                                                    <div className='bar'>
+                                                    </div>
+                                                    <div className='fill'>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <Moment date={itemDetail.ngayKhoiChieu} className="date" format="DD/MM/YYYY"></Moment>
+                                    </li>
+
+                                </ul>
+                                <Rate allowHalf value={itemDetail.danhGia / 2}></Rate>
+
+                            </div>
                             <div className="description">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia alias illum, eum rerum
-                                totam nesciunt dolore quam ab officiis dolorum nostrum ex et accusantium iste ad ratione, at
-                                vel quaerat?
+                                {itemDetail.moTa}
                             </div>
                         </div>
                     </div>
                     <div className="col-md-4">
                         <div className="movie-details">
                             <div className="movie-details--show">
-                                <img src="https://kenh14cdn.com/thumb_w/660/203336854389633024/2020/11/23/12703166829099531559154778789133760485896326o-1606125414499168579629.jpg" alt className="img-fluid" />
+                                <img src={itemDetail.hinhAnh} className="img-fluid" />
                             </div>
                             <ul className="movie-details--info">
                                 <li className="key">
                                     Name
                                 </li>
                                 <li className="value">
-                                    Nguyen ne
+                                    {itemDetail.tenPhim}
                                 </li>
+
+                            </ul>
+                            <ul className="movie-details--info">
+                                <li className="key">
+                                    Date
+                                </li>
+                                <li className="value">
+                                    <Moment date={itemDetail.ngayKhoiChieu} className="date" format="DD/MM/YYYY"></Moment>
+                                </li>
+
+                            </ul>
+                            <ul className="movie-details--info">
+                                <li className="key">
+                                    Rate
+                                </li>
+                                <li className="value">
+                                    {itemDetail.danhGia}/10
+                                </li>
+
                             </ul>
                         </div>
                     </div>
+                    <div className='col-12'>
+                        <iframe width="100%" height="500" src={itemDetail.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div className='row'>
+                    <Tabs style={{ width: "100%" }} defaultActiveKey='1' centered>
+                        <TabPane tab="Calendar" key="1">
+                            <div className='mt-20 '>
+                                <Tabs tabPosition='left'>
+                                    {itemDetail.heThongRapChieu?.map((htr, index) => {
+                                        return <TabPane
+                                            tab={<div>
+                                                <img src={htr.logo} width={50} height={50} alt={htr.logo} />
+                                                <span style={{ textTransform: "capitalize", fontWeight: 500, marginLeft: "10px" }}>{htr.tenHeThongRap}</span>
+                                            </div>}
+                                            key={index}>
+                                            {htr.cumRapChieu?.map((cumRap, index) => {
+                                                return <div key={index}>
+                                                    <div className='d-flex flex-row '>
+                                                        <img style={{ width: 60, height: 60 }} src={cumRap.hinhAnh} />
+                                                        <ul className='ml-3'>
+                                                            <li>
+                                                                {cumRap.tenCumRap}
+                                                            </li>
+                                                            <li className='mt-2'>
+                                                                {cumRap.diaChi}
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+                                                    <div className='info-calendar mt-3 mb-3'>
+                                                        {cumRap.lichChieuPhim?.slice(0, 12).map((item, index) => {
+                                                            return <div className='info-calender--link '>
+                                                                <NavLink className="" to={`/checkout/${item.maLichChieu}`} key={index}>
+                                                                    {moment(item.ngayChieuGioChieu).format('hh:mm A')}
+                                                                </NavLink>
+                                                            </div>
+                                                        })}
+                                                    </div>
+                                                </div>
+
+                                            })}
+                                        </TabPane>
+                                    })}
+                                </Tabs>
+
+                            </div>
+                        </TabPane>
+                        <TabPane tab="Information" key="2" ></TabPane>
+                    </Tabs>
+
                 </div>
             </div>
-        </section>
+        </section >
 
     )
 }

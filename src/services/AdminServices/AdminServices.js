@@ -4,8 +4,12 @@ export class AdminServices extends BaseServices {
     constructor() {
         super()
     }
-    AD_getListMovie = () => {
-        return this.get(`QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}`)
+    AD_getListMovie = (tenPhim = "") => {
+        if (tenPhim != "") {
+            return this.get(`QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}&tenPhim=${tenPhim}`)
+        }
+        else
+            return this.get(`QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}`)
     }
     AD_removeMovie = (idMovie) => {
         return this.delete(`QuanLyPhim/XoaPhim?MaPhim=${idMovie}`)
@@ -16,5 +20,10 @@ export class AdminServices extends BaseServices {
     AD_postItemMovie = (formData) => {
         return this.post(`QuanLyPhim/ThemPhimUploadHinh`, formData)
     }
+    updateMovie = (formData) => {
+        return this.post(`QuanLyPhim/CapNhatPhimUpload`, formData)
+    }
 }
+
+
 export const adminServices = new AdminServices()

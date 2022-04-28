@@ -14,6 +14,8 @@ import Edit_Film from './pages/Admin/AD_Film/Edit_Film/Edit_Film';
 import Add_Film from './pages/Admin/AD_Film/Add_Film/Add_Film';
 import ShowTime_Film from './pages/Admin/ShowTime_Film/ShowTime_Film';
 import AD_User from './pages/Admin/AD_User/AD_User';
+import Edit_User from './pages/Admin/AD_User/Edit_User/Edit_User';
+import Checkout from './pages/Layout/Checkout/Checkout';
 function App() {
   return (
     <Router history={history}>
@@ -21,13 +23,15 @@ function App() {
         <LayoutTemplate exact path="/home" Component={Home}></LayoutTemplate>
         <LayoutTemplate exact path="/login" Component={Login}></LayoutTemplate>
         <LayoutTemplate exact path="/register" Component={Register}></LayoutTemplate>
-        <LayoutTemplate exact path="/detail" Component={Detail}></LayoutTemplate>
+        <LayoutTemplate exact path="/home/detail/:id" Component={Detail}></LayoutTemplate>
+        <LayoutTemplate exact path="/checkout/:idCheckout" Component={Checkout}></LayoutTemplate>
         <AdminTemplate exact path="/admin/movie" Component={AD_Film}></AdminTemplate>
         <AdminTemplate exact path="/admin/movie/edit/:movieId" Component={Edit_Film}></AdminTemplate>
         <AdminTemplate exact path="/admin/movie/add" Component={Add_Film}></AdminTemplate>
         <AdminTemplate exact path="/admin/movie/showTime/:movieId" Component={ShowTime_Film}></AdminTemplate>
         {/* //USER */}
         <AdminTemplate exact path="/admin/user" Component={AD_User}></AdminTemplate>
+        <AdminTemplate exact path="/admin/user/edit/:taiKhoan" Component={Edit_User}></AdminTemplate>
 
         <LayoutTemplate exact path="/" Component={Home}></LayoutTemplate>
 

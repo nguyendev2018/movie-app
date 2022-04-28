@@ -5,13 +5,19 @@ import { getListMovieAction, removeMovieAction } from '../../../redux/actions/Ac
 import { NavLink } from 'react-router-dom';
 import { CalendarOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { REMOVE_ITEM_FILM } from '../../../redux/contants/AdminContant';
+import { Popconfirm, message } from 'antd';
+import { Input } from 'antd';
 
 export default function AD_Film() {
+    const { Search } = Input;
     const dispatch = useDispatch();
     const { arrFilm } = useSelector(state => state.AdminReducer);
     useEffect(() => {
         dispatch(getListMovieAction())
     }, [])
+    const onSearch = value => {
+        dispatch(getListMovieAction(value))
+    };
     const columns = [
         {
             title: 'Id',
@@ -52,20 +58,36 @@ export default function AD_Film() {
             key: 'action',
             render: (text, record) => {
                 return <Fragment>
-                    <NavLink to={`/admin/movie/edit/${record.maPhim}`}><EditOutlined /></NavLink>
-                    <button className='ml-3' onClick={() => {
+                    <NavLink to={`/admin/movie/edit/${record.maPhim}`}> <EditOutlined /></NavLink>
+                    <Popconfirm
+                        title="Are you sure to delete this project?"
+                        onConfirm={() => {
+                            dispatch(removeMovieAction(record.maPhim))
+                        }}
+
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <span style={{ cursor: "pointer" }} htmlType='submit' className='ml-3 mr-3' >
+                            <DeleteOutlined style={{ fontSize: 17 }} />
+                        </span>
+                    </Popconfirm>
+
+                    {/* <span style={{ cursor: "pointer" }} htmlType='submit' className='ml-3 mr-3' onClick={() => {
                         dispatch(removeMovieAction(record.maPhim))
-                    }}><DeleteOutlined /></button>
+                    }} ><DeleteOutlined /></span> */}
                     <NavLink to={`/admin/movie/showTime/${record.maPhim}`}> <CalendarOutlined /></NavLink>
                 </Fragment>
             }
         },
-    ];
+    ]
 
 
     return (
         <div>
-            <Table columns={columns} dataSource={arrFilm} />;
+            <Search placeholder="input search text" onSearch={onSearch} enterButton />
+
+            <Table className='mt-4' columns={columns} dataSource={arrFilm} />
         </div>
     )
 }

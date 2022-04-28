@@ -4,6 +4,7 @@ export class TheaterServices extends BaseServices {
     constructor() {
         super()
     }
+    //ADMIN
     getInforSystemMovie = () => {
         return this.get(`QuanLyRap/LayThongTinHeThongRap`)
     }
@@ -12,6 +13,10 @@ export class TheaterServices extends BaseServices {
     }
     createCalendar = (form) => {
         return this.post(`QuanLyDatVe/TaoLichChieu`, form)
+    }
+    //Layout
+    getInfoCalendarMovie = (maPhim) => {
+        return this.get(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
     }
 }
 export const theaterServices = new TheaterServices()

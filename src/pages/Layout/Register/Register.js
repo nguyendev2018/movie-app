@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import { SIGN_UP } from '../../../redux/contants/MovieContants';
+import { GROUPID } from '../../../utils/settingSystem';
 
 function Register(props) {
     const {
@@ -65,7 +66,8 @@ const RegisterWithFormik = withFormik({
         matKhau: "",
         email: "",
         sdt: "",
-        hoTen: ""
+        hoTen: "",
+        maNhom: GROUPID
     }),
 
     handleSubmit: (value, { props }) => {

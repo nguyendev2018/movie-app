@@ -1,0 +1,85 @@
+.checkout {
+    .price {
+        font-weight: 600;
+        color: green;
+    }
+
+    .name-movie {
+        font-size: 17px;
+        font-weight: 400;
+    }
+
+    .text {
+        font-size: 14px !important;
+    }
+
+    .price-chair {
+        float: right;
+    }
+
+    .chair {
+        &-text {
+            font-size: 20px;
+            color: red;
+            font-weight: 500;
+        }
+
+        &-price {
+            color: green;
+            font-size: 16px;
+            margin-top: 30px;
+        }
+
+        &-list {
+            display: flex;
+            align-items: center;
+
+            span {
+                color: green;
+                margin-right: 3px;
+            }
+        }
+
+    }
+
+    .info-img {
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+
+    .layout-book-chair {
+        display: grid;
+        grid-template-columns: repeat(16, 1fr);
+        grid-gap: 12px;
+    }
+
+    .book-chair {
+        height: 35px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: rgb(123, 122, 122);
+        color: white;
+        outline: none;
+
+
+        &--seat {
+            background-color: rgb(232, 76, 76);
+            cursor: no-drop;
+        }
+
+        &-seat__doing {
+            background-color: rgb(18, 176, 18) !important;
+        }
+
+        &--vip {
+            background: rgb(164, 185, 88);
+        }
+
+        &--your {
+            background: black;
+        }
+    }
+}

@@ -19,6 +19,7 @@
         .features {
             display: flex;
             align-items: center;
+            margin: 0;
 
             li {
                 &:not(:last-child) {
@@ -29,6 +30,10 @@
             }
 
 
+        }
+
+        .ant-rate {
+            margin-left: 10px;
         }
 
         .description {
@@ -48,6 +53,7 @@
         &--info {
             display: flex;
 
+
             li {
                 &:first-child {
                     padding-right: 30px;
@@ -60,5 +66,17 @@
 
 
         }
+    }
+}
+
+.info-calender--link {
+    border: 1px solid #f36f69;
+    padding: 7px;
+
+    margin-right: 10px;
+    display: inline-block;
+
+    a {
+        color: #ee2d24 !important;
     }
 }

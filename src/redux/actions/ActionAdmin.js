@@ -3,10 +3,10 @@ import { GET_CLUSTER, GET_ITEM_FILM, GET_LIST_FILM, GET_THEATER } from "../conta
 import { notification } from "antd";
 import { history } from "../../utils/history";
 import { theaterServices } from "../../services/TheaterServices/TheaterServices";
-export const getListMovieAction = () => {
+export const getListMovieAction = (tenPhim = "") => {
     return async (dispatch) => {
         try {
-            const { data } = await adminServices.AD_getListMovie();
+            const { data } = await adminServices.AD_getListMovie(tenPhim);
             dispatch({
                 type: GET_LIST_FILM,
                 data: data.content
@@ -21,7 +21,8 @@ export const removeMovieAction = (idMovie) => {
     return async (dispatch) => {
         try {
             let result = await adminServices.AD_removeMovie(idMovie);
-            console.log(result);
+            dispatch(getListMovieAction())
+
         } catch (error) {
             console.log(error);
         }
@@ -32,6 +33,7 @@ export const getItemMovieAction = (idMovie) => {
     return async (dispatch) => {
         try {
             const { data } = await adminServices.AD_getItemMovie(idMovie);
+            console.log(data);
             dispatch({
                 type: GET_ITEM_FILM,
                 data: data.content
@@ -53,6 +55,17 @@ export const postItemMovieAction = (formData) => {
             notification.error({
                 message: " ERROR ADD "
             })
+            console.log(error);
+        }
+    }
+}
+export const updateMovieAction = (formData) => {
+    return async (dispatch) => {
+        try {
+            let result = await adminServices.updateMovie(formData);
+            alert("Edit success");
+            console.log(result.data.content);
+        } catch (error) {
             console.log(error);
         }
     }
@@ -87,10 +100,14 @@ export const getClusterTheaterAction = (value) => {
 export const postformCalendarAction = (form) => {
     return async (dispatch) => {
         try {
-            let result = await theaterServices.postformCalendar(form);
-            console.log(result);
+            const { data } = await theaterServices.createCalendar(form);
+            notification.info({
+                message: data.content
+            })
         } catch (error) {
-
+            notification.error({
+                message: "Error"
+            })
         }
     }
 }

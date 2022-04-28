@@ -68,6 +68,17 @@
         .movie-item {
             &--poster {
                 margin-bottom: 30px;
+
+                a {
+                    display: block;
+                    min-height: 200px;
+                    position: relative;
+
+                    img {
+                        position: absolute;
+                        object-fit: cover;
+                    }
+                }
             }
 
             &--content {
@@ -81,7 +92,7 @@
                         text-transform: capitalize;
                     }
 
-                    span.date {
+                    .date {
                         color: $color-red;
                     }
                 }

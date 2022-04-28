@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, InputNumber, Select } from 'antd';
+import { Button, DatePicker, Form, InputNumber, notification, Select } from 'antd';
 import { useFormik } from 'formik';
 import moment from 'moment';
 import React, { useEffect } from 'react';
@@ -19,14 +19,9 @@ export default function ShowTime_Film(props) {
             maRap: "",
             giaVe: ""
         },
-        onSubmit: async (value) => {
-            console.log(value);
-            try {
-                const result = await theaterServices.createCalendar(value);
-                console.log(result);
-            } catch (error) {
-                console.log(error.response.data);
-            }
+        onSubmit: (value) => {
+
+            dispatch(postformCalendarAction(value))
         }
     })
     useEffect(() => {

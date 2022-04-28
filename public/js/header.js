@@ -1,4 +1,4 @@
-<document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     let icon_bars = document.querySelectorAll('.icon-bars');
     let menu_mobile = document.querySelector('.header-menu--list_item');
     // icon-bars add/close

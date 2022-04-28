@@ -1,0 +1,2 @@
+export const GET_LIST_ROM_TICKET = "GET_LIST_ROM_TICKET"
+export const SET_TICKET = "SET_TICKET"

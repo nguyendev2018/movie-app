@@ -1,7 +1,18 @@
+import { useTranslation } from 'react-i18next';
+
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { Select } from 'antd';
+const { Option } = Select;
+// hook translate
 
 export default function Header() {
+    const { t, i18n } = useTranslation();
+
+    const handleChange = (e) => {
+        const { value } = e.target
+        i18n.changeLanguage(value)
+    }
     return (
         <div className="header">
             <div className="header-menu ">
@@ -112,16 +123,17 @@ export default function Header() {
                             <li className="search">
                                 <i className="fal fa-search" />
                             </li>
+
                             <li className="language">
                                 <i className="fal fa-globe" />
-                                <select name id="lang-dropdown">
-                                    <option value>EN</option>
-                                    <option value>AU</option>
-                                    <option value>VN</option>
+                                <select style={{ width: "100px" }} defaultValue="en" onChange={handleChange} name id="lang-dropdown">
+                                    <option value="en">EN</option>
+                                    <option value="chi">Chines</option>
+                                    <option value="vi">VN</option>
                                 </select>
                             </li>
                             <li className="sign-in">
-                                <NavLink to='/login'>Sign in</NavLink>
+                                <NavLink to='/login'>{t('signin')}</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -146,7 +158,7 @@ export default function Header() {
                                                 </svg>
                                                 <b>5.4</b>
                                             </div>
-                                            {'{'}/* end rate */{'}'}
+
                                         </li>
                                         <li>
                                             <div className="year">2020</div>
@@ -166,7 +178,7 @@ export default function Header() {
                                         <a href="account.html" className="add-btn">+</a>
                                     </div>
                                 </div>
-                                {'{'}/* end container  */{'}'}
+
                             </div>
 
                         </div>
@@ -186,7 +198,7 @@ export default function Header() {
                                                 </svg>
                                                 <b>5.4</b>
                                             </div>
-                                            {'{'}/* end rate */{'}'}
+
                                         </li>
                                         <li>
                                             <div className="year">2020</div>
@@ -206,7 +218,7 @@ export default function Header() {
                                         <a href="account.html" className="add-btn">+</a>
                                     </div>
                                 </div>
-                                {'{'}/* end container */{'}'}
+
                             </div>
 
                         </div>
@@ -226,7 +238,7 @@ export default function Header() {
                                                 </svg>
                                                 <b>5.4</b>
                                             </div>
-                                            {'{'}/* end rate */{'}'}
+
                                         </li>
                                         <li>
                                             <div className="year">2020</div>
@@ -246,7 +258,7 @@ export default function Header() {
                                         <a href="account.html" className="add-btn">+</a>
                                     </div>
                                 </div>
-                                {'{'}/* end container */{'}'}
+
                             </div>
 
                         </div>

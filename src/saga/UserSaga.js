@@ -3,13 +3,17 @@ import { SIGN_IN, SIGN_UP } from '../redux/contants/MovieContants';
 import { userServices } from '../services/UserServices/UserServices';
 import { history } from '../utils/history';
 import { notification } from "antd"
+import { LOGIN_LAYOUT, LOGIN_REDUCER } from '../redux/contants/UserContant';
 // interator function
 function* SignIn(action) {
 
     try {
-        const { data } = yield call(() => userServices.signIn(action.value));
-        localStorage.setItem("ACCESS_TOKEN", data.content.accessToken);
-        localStorage.setItem("DATA_USER", JSON.stringify(data.content))
+        const { data } = yield call(() => userServices.signIn(action.values));
+
+        yield put({
+            type: LOGIN_REDUCER,
+            data: data.content
+        })
         notification.info({
             message: `Login Success`,
         });
@@ -39,6 +43,6 @@ function* SignUp(action) {
 }
 export function* followUserSaga() {
     // listen last
-    yield takeLatest(SIGN_IN, SignIn);
+    yield takeLatest(LOGIN_LAYOUT, SignIn);
     yield takeLatest(SIGN_UP, SignUp)
 }
